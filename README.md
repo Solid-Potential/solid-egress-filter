@@ -1,8 +1,19 @@
-# Solid Egress Filter
+# Solid Egress Filter - Terraform Modules
 
 Terraform modules that allow for easy [egress filtering](https://en.wikipedia.org/wiki/Egress_filtering) in Cloud. 
 
 It's especially useful for systems that value data security. Using egress filtering handles a vast array of attack vectors, like Reverse Shells.
+
+## Usage
+
+GCP example:
+
+```tf
+module "egress_filter" {
+  source   = "TODO"
+  variable = "TODO
+}
+```
 
 ## How it works
 
