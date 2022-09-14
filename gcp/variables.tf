@@ -1,9 +1,21 @@
 variable "project" {
-  type = string
+  type    = string
+  default = null
 }
 
 variable "region" {
-  type = string
+  type    = string
+  default = null
+}
+
+variable "vpc_name" {
+  type    = string
+  default = "default"
+}
+
+variable "subnet_name" {
+  type    = string
+  default = "default"
 }
 
 variable "prefix" {
