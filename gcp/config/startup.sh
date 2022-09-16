@@ -18,7 +18,7 @@ sudo apt install wget -y
 
 echo "Installing MITM Proxy"
 wget https://snapshots.mitmproxy.org/8.1.1/mitmproxy-8.1.1-linux.tar.gz
-tar vczf mitmproxy-8.1.1-linux.tar.gz
+tar -zxvf mitmproxy-8.1.1-linux.tar.gz
 rm mitmproxy-8.1.1-linux.tar.gz
 
 echo "Apply MITM configuration"
