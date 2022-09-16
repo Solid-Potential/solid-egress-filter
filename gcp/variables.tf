@@ -42,3 +42,8 @@ variable "tags" {
   default = []
   type    = list(string)
 }
+
+variable "sa_name"{
+  type = string
+  default = "solid-egress-filter-sa"
+}
