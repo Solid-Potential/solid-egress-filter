@@ -9,16 +9,15 @@ resource "google_compute_route" "default_internet_gateway" {
   next_hop_gateway = "default-internet-gateway"
 }
 
-# TODO enable when forwarding rule is ready
-# resource "google_compute_route" "forward_to_egress_filter" {
-#   project      = var.project
-#   description  = "Forward all internet egress to Egress Filter"
-#   name         = "${local.prefix}forward-to-egress-filter"
-#   dest_range   = "0.0.0.0/0"
-#   network      = var.vpc_name
-#   priority     = 999
-#   next_hop_ilb = google_compute_forwarding_rule.egress_filter.id
-# }
+resource "google_compute_route" "forward_to_egress_filter" {
+  project      = var.project
+  description  = "Forward all internet egress to Egress Filter"
+  name         = "${local.prefix}forward-to-egress-filter"
+  dest_range   = "0.0.0.0/0"
+  network      = var.vpc_name
+  priority     = 999
+  next_hop_ilb = google_compute_forwarding_rule.egress_filter_forwarding_rule.id
+}
 
 resource "google_compute_route" "restricted_google_apis" {
   project = var.project

@@ -14,7 +14,7 @@ resource "google_compute_instance_template" "egress_filter" {
 
     auto_delete = false
 
-    source_image = "source-image-1"
+    source_image = "packer-1663596114"
     # TODO KMS support
     # disk_encryption_key {
     # }
