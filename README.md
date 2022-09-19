@@ -5,6 +5,7 @@ Terraform modules that allow for easy [egress filtering](https://en.wikipedia.or
 It's especially useful for systems that value data security. Using egress filtering handles a vast array of attack vectors, like Reverse Shells.
 
 ## Table of Contents
+
 - [How it works](#how-it-works)
 - [Usage](#usage)
 - [Supported providers](#supported-providers)
@@ -33,17 +34,21 @@ module "egress_filter" {
 
 ## Supported providers
 
-* Google Cloud Platform (In progress) 
-* AWS (planned)
-* Azure (planned)
+- Google Cloud Platform (In progress)
+- AWS (planned)
+- Azure (planned)
 
 ## Code style
+
 Code style guide can be found [here](https://github.com/Solid-Potential/solid-egress-filter/blob/main/TERRAFORM_STYLE_GUIDE.md)
 
 ## Contribution
+
 We appreciate feedback and contribution to this template! Before you get started, please see the following:
+
 - [General contribution guidelines](https://github.com/Solid-Potential/solid-egress-filter/blob/main/CONTRIBUTING.md)
 - [Code of Conduct](https://github.com/Solid-Potential/solid-egress-filter/blob/main/CODE-OF-CONDUCT.md)
 
 ## Licence
+
 This repo is covered under the [GNU General Public License](https://github.com/Solid-Potential/solid-egress-filter/blob/main/LICENSE)
