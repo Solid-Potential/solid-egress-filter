@@ -67,4 +67,6 @@ variable "autoscaling_cooldown_period" {
   default = 300
 }
 
-
+variable "filter_network_tag" {
+  default = "egress-filter"
+}
