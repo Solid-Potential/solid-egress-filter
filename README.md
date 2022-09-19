@@ -26,7 +26,7 @@ TODO: abstract architecture diagram
 
 ## Supported providers
 
-* Google Cloud Platform (planned) 
+* Google Cloud Platform (In progress) 
 * AWS (planned)
 * Azure (planned)
 
