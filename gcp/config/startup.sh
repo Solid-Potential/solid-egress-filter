@@ -23,10 +23,23 @@ tar -zxvf mitmproxy-8.1.1-linux.tar.gz;
 rm mitmproxy-8.1.1-linux.tar.gz;
 
 echo "Apply MITM configuration";
-# TODO
-echo "transparent mode"
+echo "enable forwarding mode"; 
 sudo sysctl -w net.ipv4.ip_forward=1;
 sudo sysctl -w net.ipv6.conf.all.forwarding=1;
+
+echo "disable ICMP redirects";
+sudo sysctl -w net.ipv4.conf.all.send_redirects=0;
+
+echo "configure iptables";
+
+sudo iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 80 -j REDIRECT --to-port 8080;
+sudo iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 443 -j REDIRECT --to-port 8080;
+sudo ip6tables -t nat -A PREROUTING -i eth0 -p tcp --dport 80 -j REDIRECT --to-port 8080;
+sudo ip6tables -t nat -A PREROUTING -i eth0 -p tcp --dport 443 -j REDIRECT --to-port 8080;
+
+echo "start mitmproxy";
+mitmproxy --mode transparent --showhost;
+
 
 echo "Configure Ops Agent log streams";
 # TODO
