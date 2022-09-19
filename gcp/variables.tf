@@ -47,3 +47,24 @@ variable "sa_name"{
   type = string
   default = "solid-egress-filter-sa"
 }
+
+variable "autoscaling_mode" {
+  type = string
+  default = "ON"
+}
+
+variable "autoscaling_min_replicas" {
+  type = number
+  default = 1
+}
+
+variable "autoscaling_max_replicas" {
+  type = number
+  default = 3
+}
+variable "autoscaling_cooldown_period" {
+  type = number
+  default = 60
+}
+
+

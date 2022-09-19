@@ -81,9 +81,10 @@ resource "google_compute_region_autoscaler" "egress_filter" {
   target = google_compute_region_instance_group_manager.egress_filter.id
 
   autoscaling_policy {
-    max_replicas    = 3
-    min_replicas    = 1
-    cooldown_period = 60
+    mode = var.autoscaling_mode
+    max_replicas    = var.autoscaling_max_replicas
+    min_replicas    = var.autoscaling_min_replicas
+    cooldown_period = var.autoscaling_cooldown_period
 
     cpu_utilization {
       target = 0.7
