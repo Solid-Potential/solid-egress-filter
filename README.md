@@ -38,9 +38,12 @@ module "egress_filter" {
 - AWS (planned)
 - Azure (planned)
 
-## Code style
-
+## Code style, code analysis and documentation
 Code style guide can be found [here](https://github.com/Solid-Potential/solid-egress-filter/blob/main/TERRAFORM_STYLE_GUIDE.md)
+
+For static code analysis we are using [tfsec](https://github.com/aquasecurity/tfsec) - tool for static analysis of terraform code to spot potential misconfigurations.
+
+Module documentation is generated using [tfdoc](https://github.com/maur1th/tfdoc). Be sure to follow our code convention!
 
 ## Contribution
 
