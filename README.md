@@ -37,11 +37,11 @@ module "egress_filter" {
 }
 ```
 
-## Supported providers
+## Supported Cloud Providers
 
-- Google Cloud Platform (In progress)
-- AWS (planned)
-- Azure (planned)
+- [Google Cloud Platform](https://github.com/Solid-Potential/solid-egress-filter/blob/main/gcp) (:construction: Under development)
+- AWS (:hourglass_flowing_sand: planned)
+- Azure (:hourglass_flowing_sand: planned)
 
 ## Code style, code analysis and documentation
 Code style guide can be found [here](https://github.com/Solid-Potential/solid-egress-filter/blob/main/TERRAFORM_STYLE_GUIDE.md)
