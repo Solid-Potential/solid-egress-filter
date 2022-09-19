@@ -24,12 +24,12 @@ rm mitmproxy-8.1.1-linux.tar.gz;
 
 echo "Apply MITM configuration";
 # TODO
+echo "transparent mode"
+sudo sysctl -w net.ipv4.ip_forward=1;
+sudo sysctl -w net.ipv6.conf.all.forwarding=1;
 
 echo "Configure Ops Agent log streams";
 # TODO
 
 echo "Healthcheck API";
 # TODO
-
-
-sudo reboot;
