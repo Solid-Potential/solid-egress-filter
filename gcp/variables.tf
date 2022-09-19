@@ -64,7 +64,7 @@ variable "autoscaling_max_replicas" {
 }
 variable "autoscaling_cooldown_period" {
   type = number
-  default = 60
+  default = 300
 }
 
 
