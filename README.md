@@ -4,6 +4,11 @@ Terraform modules that allow for easy [egress filtering](https://en.wikipedia.or
 
 It's especially useful for systems that value data security. Using egress filtering handles a vast array of attack vectors, like Reverse Shells.
 
+# :warning: Pre-Release warning :warning:
+This codebase is currently under early-stage developemnt. It is still not tested, contains hardcoded values and only works for special use-cases.
+
+If you need this module show us love by leaving a star, and consider [contributing](#contribution).
+
 ## Table of Contents
 
 - [How it works](#how-it-works)
