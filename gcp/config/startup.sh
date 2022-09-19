@@ -11,14 +11,13 @@ sudo apt-get upgrade -y;
 
 echo "Installing Ops Agent";
 curl -sSO https://dl.google.com/cloudagents/add-google-cloud-ops-agent-repo.sh;
-sudo bash add-google-cloud-ops-agent-repo.sh --also-install ;
-rm add-google-cloud-ops-agent-repo.sh;
+bash add-google-cloud-ops-agent-repo.sh --also-install ;
 
 echo "Installing wget";
 sudo apt-get install wget -y;
 
 echo "Installing MITM Proxy";
-wget https://snapshots.mitmproxy.org/8.1.1/mitmproxy-8.1.1-linux.tar.gz;
+sudo wget https://snapshots.mitmproxy.org/8.1.1/mitmproxy-8.1.1-linux.tar.gz ;
 tar -zxvf mitmproxy-8.1.1-linux.tar.gz;
 rm mitmproxy-8.1.1-linux.tar.gz;
 
@@ -37,8 +36,9 @@ sudo iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 443 -j REDIRECT --to-p
 sudo ip6tables -t nat -A PREROUTING -i eth0 -p tcp --dport 80 -j REDIRECT --to-port 8080;
 sudo ip6tables -t nat -A PREROUTING -i eth0 -p tcp --dport 443 -j REDIRECT --to-port 8080;
 
-echo "start mitmproxy";
-./mitmproxy --mode transparent --showhost;
+echo "start mitmproxy if not in packer";
+instance_name=$(curl http://metadata.google.internal/computeMetadata/v1/instance/id -H "Metadata-Flavor: Google")
+if [[ ! $instance_name =~ ^packer.*] ]; then ./mitmproxy --mode transparent --showhost; fi
 
 
 echo "Configure Ops Agent log streams";
