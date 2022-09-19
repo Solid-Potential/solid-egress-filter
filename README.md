@@ -1,6 +1,6 @@
 # Solid Egress Filter - Terraform Modules
 
-Terraform modules that allow for easy [egress filtering](https://en.wikipedia.org/wiki/Egress_filtering) in Cloud. 
+Terraform modules that allow for easy [egress filtering](https://en.wikipedia.org/wiki/Egress_filtering) in Cloud. It was loosely inspired by [this article ](https://aws.amazon.com/blogs/security/how-to-add-dns-filtering-to-your-nat-instance-with-squid/) on the AWS Security Blog.
 
 It's especially useful for systems that value data security. Using egress filtering handles a vast array of attack vectors, like Reverse Shells.
 
