@@ -17,9 +17,13 @@ echo "Installing wget";
 sudo apt-get install wget -y;
 
 echo "Installing MITM Proxy";
+if [[  $instance_name =~ ^packer.*] ]; 
+then
 sudo wget https://snapshots.mitmproxy.org/8.1.1/mitmproxy-8.1.1-linux.tar.gz ;
 tar -zxvf mitmproxy-8.1.1-linux.tar.gz;
 rm mitmproxy-8.1.1-linux.tar.gz;
+./mitmproxy --mode transparent --showhost; 
+fi
 
 echo "Apply MITM configuration";
 echo "enable forwarding mode"; 
