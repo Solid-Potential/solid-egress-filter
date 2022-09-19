@@ -1,17 +1,3 @@
-# # VPC
-# resource "google_compute_network" "ilb_network" {
-#   name = "default"
-# }
-
-# # backed subnet
-# resource "google_compute_subnetwork" "ilb_subnet" {
-#   name   = "default"
-#   region = var.region
-#   ip_cidr_range = "10.132.0.0/20"
-
-#   network = google_compute_network.ilb_network.id
-# }
-
 # forwarding rule
 resource "google_compute_forwarding_rule" "egress_filter_forwarding_rule" {
   name            = "egress-filter-forwarding-rule"
