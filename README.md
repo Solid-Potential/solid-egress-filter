@@ -60,3 +60,8 @@ We appreciate feedback and contribution to this template! Before you get started
 ## Licence
 
 This repo is covered under the [GNU General Public License](https://github.com/Solid-Potential/solid-egress-filter/blob/main/LICENSE)
+
+
+## Stars over time
+
+[![Stars over time](https://starchart.cc/Solid-Potential/solid-egress-filter.svg)](https://starchart.cc/Solid-Potential/solid-egress-filter)
