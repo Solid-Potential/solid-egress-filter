@@ -5,17 +5,17 @@ data "google_compute_subnetwork" "subnet" {
   project = var.project
 }
 data "template_file" "squid_config" {
-  template = file("${path.root}/config/squid.tpl")
+  template = file("${path.module}/config/squid.tpl")
   vars = {
     cidr = data.google_compute_subnetwork.subnet.ip_cidr_range
   }
 }
 
 data "template_file" "startup_script" {
-  template = file("${path.root}/config/config.tpl")
+  template = file("${path.module}/config/config.tpl")
   vars = {
     squid_config = data.template_file.squid_config.rendered
-    whitelist    = file("${path.root}/config/whitelist.txt")
+    whitelist    = file("${path.module}/config/whitelist.txt")
   }
 }
 output "startup_script" {

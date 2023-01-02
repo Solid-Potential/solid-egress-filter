@@ -4,7 +4,7 @@ source "googlecompute" "squid-proxy" {
   project_id          = "solid-egress-filter"
   source_image_family = "ubuntu-1804-lts"
   ssh_username        = "solid-egress-filter"
-  startup_script_file = "${path.root}/../config/startup.sh"
+  startup_script_file = "${path.module}/../config/startup.sh"
   network             = "projects/solid-egress-filter/global/networks/dev-vpc"
   subnetwork          = "projects/solid-egress-filter/regions/europe-west1/subnetworks/dev-subnet"
   zone                = "europe-west1-b"
