@@ -47,34 +47,34 @@ LAN_IN="eth1"
 SQUID_PORT="3128"
 # Clean old firewall
 
-echo "configuring iptables"
-iptables -F
-iptables -X
-iptables -t nat -F
-iptables -t nat -X
-iptables -t mangle -F
-iptables -t mangle -X
-echo 1 > /proc/sys/net/ipv4/ip_forward
+# echo "configuring iptables"
+# iptables -F
+# iptables -X
+# iptables -t nat -F
+# iptables -t nat -X
+# iptables -t mangle -F
+# iptables -t mangle -X
+# echo 1 > /proc/sys/net/ipv4/ip_forward
 
-echo  "Setting default filter policy"
-iptables -P INPUT DROP
-iptables -P OUTPUT ACCEPT
-iptables -A INPUT -i lo -j ACCEPT
-iptables -A OUTPUT -o lo -j ACCEPT
-# Allow UDP, DNS and Passive FTP
-iptables -A INPUT -i $INTERNET -m state --state ESTABLISHED,RELATED -j ACCEPT
-# set this system as a router for Rest of LAN
-iptables --table nat --append POSTROUTING --out-interface $INTERNET -j MASQUERADE
-iptables --append FORWARD --in-interface $LAN_IN -j ACCEPT
-# unlimited access to LAN
-iptables -A INPUT -i $LAN_IN -j ACCEPT
-iptables -A OUTPUT -o $LAN_IN -j ACCEPT
-# DNAT port 80 request comming from LAN systems to squid 3128 ($SQUID_PORT) aka transparent proxy
-iptables -t nat -A PREROUTING -i $LAN_IN -p tcp --dport 80 -j DNAT --to $SQUID_SERVER:$SQUID_PORT
-iptables -t nat -A PREROUTING -i $INTERNET -p tcp --dport 80 -j REDIRECT --to-port $SQUID_PORT
-# DROP everything and Log it
-iptables -A INPUT -j LOG
-iptables -A INPUT -j DROP
+# echo  "Setting default filter policy"
+# iptables -P INPUT DROP
+# iptables -P OUTPUT ACCEPT
+# iptables -A INPUT -i lo -j ACCEPT
+# iptables -A OUTPUT -o lo -j ACCEPT
+# # Allow UDP, DNS and Passive FTP
+# iptables -A INPUT -i $INTERNET -m state --state ESTABLISHED,RELATED -j ACCEPT
+# # set this system as a router for Rest of LAN
+# iptables --table nat --append POSTROUTING --out-interface $INTERNET -j MASQUERADE
+# iptables --append FORWARD --in-interface $LAN_IN -j ACCEPT
+# # unlimited access to LAN
+# iptables -A INPUT -i $LAN_IN -j ACCEPT
+# iptables -A OUTPUT -o $LAN_IN -j ACCEPT
+# # DNAT port 80 request comming from LAN systems to squid 3128 ($SQUID_PORT) aka transparent proxy
+# iptables -t nat -A PREROUTING -i $LAN_IN -p tcp --dport 80 -j DNAT --to $SQUID_SERVER:$SQUID_PORT
+# iptables -t nat -A PREROUTING -i $INTERNET -p tcp --dport 80 -j REDIRECT --to-port $SQUID_PORT
+# # DROP everything and Log it
+# iptables -A INPUT -j LOG
+# iptables -A INPUT -j DROP
 
 echo "restarting squid"
 service squid restart
