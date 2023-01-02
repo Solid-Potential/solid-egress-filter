@@ -5,8 +5,8 @@ data "packer_version" "version" {}
 data "packer_files" "packer_config_dir" {
   directory = "${path.module}/packer"
 }
-data "packer_files" "vm_config_files"{
-    directory = "${path.module}/config"
+data "packer_files" "vm_config_files" {
+  directory = "${path.module}/config"
 }
 
 
@@ -36,5 +36,6 @@ output "packer_version" {
 }
 
 output "image_id" {
-  value  = packer_image.solid_proxy_image.id
+  value = packer_image.solid_proxy_image.id
 }
+

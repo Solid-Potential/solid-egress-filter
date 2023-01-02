@@ -1,3 +1,27 @@
+
+data "google_compute_subnetwork" "subnet" {
+  name    = var.subnet_name
+  region  = var.region
+  project = var.project
+}
+data "template_file" "squid_config" {
+  template = file("${path.module}/config/squid.tpl")
+  vars = {
+    cidr = data.google_compute_subnetwork.subnet.ip_cidr_range
+  }
+}
+
+data "template_file" "startup_script" {
+  template = file("${path.module}/config/config.tpl")
+  vars = {
+    squid_config = data.template_file.squid_config.rendered
+    whitelist    = file("${path.module}/config/whitelist.txt")
+  }
+}
+output "startup_script" {
+  value = data.template_file.startup_script.rendered
+}
+
 resource "google_compute_instance_template" "egress_filter" {
   project      = var.project
   name_prefix  = "${local.prefix}egress-filter"
@@ -14,7 +38,7 @@ resource "google_compute_instance_template" "egress_filter" {
 
     auto_delete = false
 
-    source_image = "packer-1663596114"
+    source_image = "ubuntu-1804-bionic-arm64-v20221201"
     # TODO KMS support
     # disk_encryption_key {
     # }
@@ -22,7 +46,7 @@ resource "google_compute_instance_template" "egress_filter" {
 
   network_interface {
     network    = var.vpc_name
-    subnetwork = var.subnet_name
+    subnetwork = data.google_compute_subnetwork.subnet.self_link
   }
 
   can_ip_forward = true
@@ -32,9 +56,7 @@ resource "google_compute_instance_template" "egress_filter" {
 
   metadata = {
     # TODO - base image from packer or with startup script
-    startup-script = templatefile("${path.module}/config/startup.sh", {
-
-    })
+    startup-script = data.template_file.startup_script.rendered
   }
 
   # TODO
@@ -60,12 +82,16 @@ resource "google_compute_region_instance_group_manager" "egress_filter" {
   name = "egress-filter-igm"
 
   base_instance_name = "egress-filter"
-  region = var.region
+  region             = var.region
 
-  target_pools = [ google_compute_target_pool.egress_filter.id ]
+  target_pools = [google_compute_target_pool.egress_filter.id]
 
   version {
     instance_template = google_compute_instance_template.egress_filter.id
+  }
+  named_port {
+    name = "http"
+    port = 80
   }
 }
 
@@ -81,7 +107,7 @@ resource "google_compute_region_autoscaler" "egress_filter" {
   target = google_compute_region_instance_group_manager.egress_filter.id
 
   autoscaling_policy {
-    mode = var.autoscaling_mode
+    mode            = var.autoscaling_mode
     max_replicas    = var.autoscaling_max_replicas
     min_replicas    = var.autoscaling_min_replicas
     cooldown_period = var.autoscaling_cooldown_period
@@ -91,3 +117,4 @@ resource "google_compute_region_autoscaler" "egress_filter" {
     }
   }
 }
+
