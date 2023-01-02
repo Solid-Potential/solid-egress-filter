@@ -17,9 +17,7 @@ variable "subnet_name" {
   type    = string
   default = "default"
 }
-variable "subnet_link" {
-  type = string
-}
+
 
 variable "prefix" {
   description = "Prefix for all resource names. Allows to deploy multiple instances in the same project."
