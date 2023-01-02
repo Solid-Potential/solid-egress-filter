@@ -17,6 +17,9 @@ variable "subnet_name" {
   type    = string
   default = "default"
 }
+variable "subnet_link" {
+  type = string
+}
 
 variable "prefix" {
   description = "Prefix for all resource names. Allows to deploy multiple instances in the same project."
@@ -49,21 +52,21 @@ variable "sa_name" {
 }
 
 variable "autoscaling_mode" {
-  type = string
+  type    = string
   default = "ON"
 }
 
 variable "autoscaling_min_replicas" {
-  type = number
+  type    = number
   default = 1
 }
 
 variable "autoscaling_max_replicas" {
-  type = number
+  type    = number
   default = 3
 }
 variable "autoscaling_cooldown_period" {
-  type = number
+  type    = number
   default = 300
 }
 

@@ -2,16 +2,14 @@
 resource "google_compute_forwarding_rule" "egress_filter_forwarding_rule" {
   name            = "egress-filter-forwarding-rule"
   backend_service = google_compute_region_backend_service.egress_filter_backend.id
-
   region = var.region
-
   ip_protocol           = "TCP"
   load_balancing_scheme = "INTERNAL"
   all_ports             = true
   allow_global_access   = true
-
-  network    = var.vpc_name
-  subnetwork = var.subnet_name
+  project               = var.project
+  network               = var.vpc_name
+  subnetwork            = var.subnet_name
 }
 
 # backend service
@@ -39,6 +37,6 @@ resource "google_compute_region_health_check" "egress_filter" {
   unhealthy_threshold = 10
 
   tcp_health_check {
-	port = 8080
+    port = 80
   }
 }
